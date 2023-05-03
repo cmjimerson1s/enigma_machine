@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="{% url 'reservation' %}" class="me-2 ms-2" required>
+    <input type="date">
+    <button type="submit" class="btn btn-primary text-white">Continue</button>
+</form>
+{% endblock content %}

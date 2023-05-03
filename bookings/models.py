@@ -9,9 +9,21 @@ class Reservation(models.Model):
     price = models.IntegerField()
     date = models.DateField(auto_created=False)
     time_slot = models.CharField(max_length=5)
+    room_choice = models.ForeignKey('Room', on_delete=models.CASCADE, related_name="room_choice")
 
     class Meta:
         ordering = ['-date']
 
     def __str__(self):
         return f"{self.time_slot} + {self.date}"
+
+
+class Room(models.Model):
+    room_name = models.CharField(max_length=200)
+    room_description = models.TextField()
+
+    class Meta:
+        ordering = ['room_name']
+
+    def __str__(self):
+        return self.room_name
