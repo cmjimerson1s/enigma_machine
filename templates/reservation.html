@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Today:</h1>
+<h2>2023-05-01</h2>
+<th>
+    <tr>
+        15:30
+    </tr>
+</th>
+<ul>
+    {% for reservation in reservations %}
+        <li>{{reservation}}</li>
+    {% endfor%}
+
+{% endblock content %}
