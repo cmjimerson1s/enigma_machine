@@ -7,9 +7,14 @@
         15:30
     </tr>
 </th>
+
 <ul>
     {% for reservation in reservations %}
-        <li>{{reservation}}</li>
+        {% ifequal reservation.date date_today %}
+            <li>True</li>
+        {% else %}
+            <li>False</li>
+        {% endifequal %}
     {% endfor%}
 
 {% endblock content %}
