@@ -13,23 +13,34 @@ def reservation_view(request):
     return render(request, 'reservation.html', {'reservations': reservations, 'date_today': date_today})
 
 
+# @csrf_exempt
+# def dateChoiceView(request):
+
+#     if request.method == 'POST':
+#         form = ExampleForm(request.POST)
+
+#         if form.is_valid():
+#             day = request.POST.get('day')
+            
+#             request.session['days'] = day
+#             request.session['name'] = name
+
+#             return redirect('reservation')
+#     else:
+#         form = ExampleForm()
+
+#     return render(request, "date_choice.html", {'form': form})
+
 @csrf_exempt
 def dateChoiceView(request):
-
     if request.method == 'POST':
-        form = ExampleForm(request.POST)
+        day = request.POST.get('day')
 
-        if form.is_valid():
-            day = request.POST.get('day')
-            
-            request.session['days'] = day
-            request.session['name'] = name
+        request.session['day'] = day
+        
+        return redirect('reservation')
 
-            return redirect('reservation')
-    else:
-        form = ExampleForm()
-
-    return render(request, "date_choice.html", {'form': form})
+    return render(request, "date_choice.html")
 
 
 @csrf_exempt
