@@ -1,6 +1,6 @@
 from django import forms
-from .widget import DatePickerInput, TimePickerInput, DateTimePickerInput
-
+from .widget import DatePickerInput
 
 class DateForm(forms.Form):
-    day = forms.DateField(widget=DatePickerInput)
+    selection = forms.DateField(widget=DatePickerInput)
+

@@ -7,14 +7,14 @@
         15:30
     </tr>
 </th>
-<h1>{{ day }}</h1>
+<h1>{{ selection }}</h1>
 <ul>
-    {% for reservation in reservations %}
+    <!-- {% for reservation in reservations %}
         {% ifequal reservation.date date_today %}
             <li>True</li>
         {% else %}
             <li>False</li>
         {% endifequal %}
-    {% endfor%}
+    {% endfor%} -->
 
 {% endblock content %}

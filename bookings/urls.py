@@ -2,6 +2,6 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.dateChoiceView),
+    path('', views.dateChoiceView, name='home'),
     path('reservation/', views.reservationGridView, name="reservation")
 ]
