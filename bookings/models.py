@@ -9,7 +9,7 @@ class Reservation(models.Model):
     price = models.IntegerField()
     date = models.DateField(auto_created=False)
     time_slot = models.CharField(max_length=5)
-    room_choice = models.ForeignKey('Room', on_delete=models.CASCADE, related_name="room_choice")
+    room_choice = models.ForeignKey('Room', on_delete=models.CASCADE, related_name="room_choice", null=True)
 
     class Meta:
         ordering = ['-date']
