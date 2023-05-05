@@ -40,7 +40,16 @@ def timeChecks(room, date, times):
     for time in times:
         checked = checkRes(room, date, time)
         result.append(checked)
-    return result        
+    return result  
+
+
+def dayView(rooms, date, times):
+    result = []
+    for room in rooms:
+        time_list = timeChecks(room, date, times)
+        list_pairs = {room: time_list}
+        result.append(list_pairs)
+    return result          
 
 def reservationGridView(request):
     data = request.POST['selection']
