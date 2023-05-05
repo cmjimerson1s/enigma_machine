@@ -27,3 +27,14 @@ class Room(models.Model):
 
     def __str__(self):
         return self.room_name
+
+
+class GameTime(models.Model):
+    game_slot = models.CharField(max_length=5)
+
+    class Meta:
+        ordering = ['game_slot']
+
+    def __str__(self):
+        return self.game_slot
+

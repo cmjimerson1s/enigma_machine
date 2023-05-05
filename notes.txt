@@ -1,0 +1,5 @@
+IF YOU HAVE TO MIGRATE PROJECT DUE TO GITPOD HOUR ISSUES
+
+pip3 install -r requirements.txt
+touch env.py
+enter variables in the env file
