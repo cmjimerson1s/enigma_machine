@@ -34,6 +34,14 @@ def checkRes(room, date, time):
         result = 501
         return result
 
+
+def timeChecks(room, date, times):
+    result = []
+    for time in times:
+        checked = checkRes(room, date, time)
+        result.append(checked)
+    return result        
+
 def reservationGridView(request):
     data = request.POST['selection']
     template = 'reservation.html'
