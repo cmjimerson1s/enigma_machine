@@ -25,6 +25,15 @@ def resultView(request):
     return render(request, template, context)
 
 
+def checkRes(room, date, time):
+
+    if (Reservation.objects.filter(date=date, room=room, time=time).exists()):
+        result = 45
+        return result
+    else:
+        result = 501
+        return result
+
 def reservationGridView(request):
     data = request.POST['selection']
     template = 'reservation.html'
