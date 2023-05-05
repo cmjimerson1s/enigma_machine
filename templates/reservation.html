@@ -1,31 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 
-
+<div class="d-flex flex-row">
     {% for result in results %}
-    <div class="d-flex flex-row">
         <div class="flex-grow-1">
-            <table>
-                {% for key, values in result.items %}
-                
-                <thead>
-                <tr>
-                    <th>{{key}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for value in values %}
-                <tr>
-                    <td id="iterate-{{ forloop.counter }}">{{ value }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            
-                {% endfor %}
-            </table>
+                <table>
+                    <thead>
+                        {% for key, values in result.items %}
+                            <tr>
+                                <th>{{key}}</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {% for value in values %}
+                            <tr>
+                                <td id="iterate-{{ forloop.counter }}">{{ value }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
         </div>
-    </div>
-{% endfor %}
+    {% endfor %} 
+</div>
 
   <script>
     // Get all list items using a CSS selector
