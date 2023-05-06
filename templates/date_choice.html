@@ -5,12 +5,6 @@
 <form method="POST" action="{% url 'reservation' %}" class="me-2 ms-2" required>
     {% csrf_token %}
     {{ form }}
-    <!-- <label for="select_days">Select Days</label>
-    <select name="day" id="day">
-        <option value="2023-05-01">2023-05-01</option>
-        <option value="2023-05-02">2023-05-02</option>
-        <option value="2023-05-03">2023-05-03</option>
-    </select> -->
     <button type="submit" class="btn btn-primary text-white">Continue</button>
 </form>
 {% endif %}
