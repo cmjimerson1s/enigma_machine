@@ -32,7 +32,7 @@ def checkRes(room, date, time):
         result = 45
         return result
     else:
-        result = 501
+        result = time
         return result
 
 
