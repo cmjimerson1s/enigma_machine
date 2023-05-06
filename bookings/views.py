@@ -21,7 +21,7 @@ def resultView(request):
 
     context = {
         'results': results,
-        'selection': specific_date
+        'selections': specific_date
     }
     return render(request, template, context)
 
@@ -50,4 +50,25 @@ def dayView(rooms, date, times):
         time_list = timeChecks(room, date, times)
         list_pairs = {room: time_list}
         result.append(list_pairs)
-    return result          
+    return result    
+
+
+def choiceView(request):
+    template = "selected_reservation.html"
+    room_data = request.POST['key']
+    time_data = request.POST['value']
+
+    specific_date = request.POST['selected_date']
+    specific_times = GameTime.objects.all()
+    room_list = Room.objects.all()
+
+    results = dayView(room_list, specific_date, specific_times)
+
+    context = {
+        'room': room_data,
+        'time': time_data,
+        'results': results,
+        'date': specific_date
+    }
+
+    return render(request, template, context)      
