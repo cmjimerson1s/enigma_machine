@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
+{{ selection }}
 <div class="d-flex flex-row">
     {% for result in results %}
         <div class="flex-grow-1">
@@ -16,7 +17,7 @@
                             <tr>
                                 <td id="iterate-{{ forloop.counter }}">
                                   <form method="POST" action="{% url 'reservation' %}" class="me-2 ms-2" required>
-                                    <button type="submit" class="btn btn-primary text-white">{{ value }}</button>
+                                    <button type="submit" id="button{{ forloop.counter }}" class="btn btn-primary text-white">{{ value }}</button>
                                   </form>
                                 </td>
                             </tr>
@@ -43,5 +44,19 @@
         value.disabled = true
       }
     });
+    $(document).ready(function() {
+        $('#myButton').click(function() {
+          $.ajax({
+            url: '{% url "my_view" %}',
+            dataType: 'json',
+            success: function(data) {
+              console.log(data.key, data.value);
+              // Do something with the key-value pair
+            }
+          });
+        });
+      });
+
+
   </script>  
 {% endblock %}

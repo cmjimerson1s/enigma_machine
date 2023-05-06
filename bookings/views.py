@@ -21,6 +21,7 @@ def resultView(request):
 
     context = {
         'results': results,
+        'selection': specific_date
     }
     return render(request, template, context)
 
