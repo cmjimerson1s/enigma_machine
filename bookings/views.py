@@ -115,7 +115,7 @@ def update_database(request):
             instance.date = date
             instance.room_choice = room
             instance.time_slot = time
-            instance.comment = comment
+            # instance.comment = comment
             instance.save()
     del request.session['cart']
     return HttpResponse('Data saved successfully.')
