@@ -9,8 +9,14 @@
     <h1>{{ current_date }}</h1>
     {% if current_date > reservations|first %}
         <h2>Past</h2>
+        {% for reservation in reservations %}
+                <h1>{{ reservation}}</h1>
+        {% endfor %}
     {% else %}
         <h2>Future</h2>
+        {% for reservation in reservations %}
+                <h1>{{ reservation }}: Edit</h1>
+        {% endfor %}
     {% endif %}
     <!-- <h1>{{entries}}</h1>
     <h1>{{ current_datetime }}</h1>
