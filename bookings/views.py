@@ -5,6 +5,9 @@ from django.views import View
 from .models import Reservation, GameTime, Room
 import ast
 
+def home(request):
+    return render(request, 'index.html', {})
+
 
 def DatePicker(request):
     if request.method == 'POST':
