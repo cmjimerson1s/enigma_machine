@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
+import ast
 
 
 def DatePicker(request):
@@ -64,6 +65,19 @@ class ShoppingView(View):
         cart = [item for item in request.session.get('cart', []) if item.get('key') and item.get('value') and item.get('specific_date')]
         context = {'results': results, 'cart': cart, "specific_date": specific_date}
         return render(request, 'reservation.html', context)
+
+
+def CartView(request):
+    cart = request.GET.get('cart')
+    string = cart.replace('[', '').replace(']', '').replace('"', '')
+    game_data = ast.literal_eval(string)
+    if isinstance(game_data, dict):
+    # if dataset is a dictionary, convert it to a tuple
+        dataset = (game_data,)
+    else:
+        dataset = game_data
+    context = {'data': dataset,}
+    return render(request, 'selected_reservation.html', context, )
 
 
 def checkRes(room, date, time):

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Hello</h1>
+<form method="POST" form action="{% url 'posted' %}?data={{ data }}">
+{{data}}
+<input type="hidden" name="data" value="{{data}}">
+    {% for booking in data %}
+        <h3>Room: {{ booking.key }}</h3>
+        <input type="hidden" name="room" value="{{ booking.key }}">
+        <h3>Time: {{ booking.value }}</h3>
+        <input type="hidden" name="time" value="{{ booking.value }}">
+        <h3>Date: {{ booking.specific_date }}</h3>
+        <input type="hidden" name="date" value="{{ booking.specific_date }}">
+        <h3>Group Size:<input name="number" type="number" min="2" max="7"></h3>
+    {% endfor %}
+        <input type="text" name="name">
+        <input type="text" name="email">
+        <input type="text" name="phone">
+        <input type="number" name="price" min="300">
+    {% csrf_token %}
+
+    <button type="submit">Complete Booking</button> 
+</form>
+  
+  <script>
+    // Get all list items using a CSS selector
+    var items = document.querySelectorAll("button");
+  
+    // Loop through each list item
+    items.forEach(function(value) {
+      // Check if the inner HTML of the item is "501"
+      if (value.innerHTML != "45") {
+        // If it is, change the inner HTML to "888"
+        value.innerHTML = "Available";
+      } else if (value.innerHTML === "45") {
+        value.innerHTML = "Unavailable"
+        value.disabled = true
+      }
+    });
+  </script>  
+{% endblock %}
