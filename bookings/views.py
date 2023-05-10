@@ -10,6 +10,8 @@ def DatePicker(request):
     if request.method == 'POST':
         selected_date = request.POST.get('selected_date')
         url = reverse('reservation') + f'?selected_date={selected_date}'
+        if 'cart' not in request.session:
+            request.session['cart'] = []
         return redirect(url)
 
     return render(request, 'date_choice.html')
@@ -113,7 +115,7 @@ def update_database(request):
             instance.room_choice = room
             instance.time_slot = time
             instance.save()
-
+    del request.session['cart']
     return HttpResponse('Data saved successfully.')
 
 
