@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.DatePicker, name='home'),
     path('reservation', views.ShoppingView.as_view(), name='reservation'),
     path('booking', views.CartView, name="booking"),
+    path('posted', views.update_database, name='posted'),
 ]

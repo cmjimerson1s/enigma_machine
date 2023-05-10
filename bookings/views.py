@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
+from django.views import View
+from .models import Reservation, GameTime, Room
 import ast
 
 
@@ -78,6 +80,41 @@ def CartView(request):
         dataset = game_data
     context = {'data': dataset,}
     return render(request, 'selected_reservation.html', context, )
+
+def update_database(request):
+    cart = request.GET.get('data')
+    string = cart.replace('[', '').replace(']', '').replace('"', '')
+    game_data = ast.literal_eval(string)
+    if isinstance(game_data, dict):
+    # if dataset is a dictionary, convert it to a tuple
+        dataset = (game_data,)
+    else:
+        dataset = game_data
+    if request.method == 'POST':
+        for item in dataset:
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            numbers = request.POST.get('number')
+            price = request.POST.get('price')
+            date = item['specific_date']
+            room_name = item['key']
+            time = item['value']
+            room = Room.objects.get(room_name=room_name)
+
+            # Create a new instance of the Reservation model and set its attributes
+            instance = Reservation()
+            instance.customer_name = name
+            instance.customer_email = email
+            instance.customer_phone = phone
+            instance.player_numbers = numbers
+            instance.price = price
+            instance.date = date
+            instance.room_choice = room
+            instance.time_slot = time
+            instance.save()
+
+    return HttpResponse('Data saved successfully.')
 
 
 def checkRes(room, date, time):
