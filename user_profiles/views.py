@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from bookings.models import Reservation
+from django.utils import timezone
+from datetime import datetime, date
 
 
 def AccountOverview(request):
@@ -26,6 +28,21 @@ def AccountReservations(request):
         user_id = request.user.id
 
     entries = Reservation.objects.filter(user_id=user_id)
-    context = {'entries': entries}
+    reservations = []
+    for entry in entries:
+        room = entry.room_choice
+        time = entry.time_slot
+        date = entry.date
+        # new_date = date.date()
+        reservations.append(date)
+        reservations.append(time)
+        reservations.append(room)
+
+    current_datetime = datetime.now()
+
+    # Extract the date component of the datetime object
+    current_date = current_datetime.date()
+
+    context = {'entries': entries, 'reservations': reservations, 'current_date': current_date}
 
     return render(request, template, context)
