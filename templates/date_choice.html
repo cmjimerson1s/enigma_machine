@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form mehtod="POST" action="{% url 'reservation' %}">
+    {% csrf_token %}
+    <input type="date" name="selected_date">
+    <button type="submit">Choose Date</button>
+</form>
+
+{% endblock content %}
