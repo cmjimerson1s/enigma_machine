@@ -83,7 +83,11 @@ def CartView(request):
         dataset = (game_data,)
     else:
         dataset = game_data
-    context = {'data': dataset,}
+    if request.user.is_authenticated:
+        email = request.user.email
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+    context = {'data': dataset,'first_name': first_name,'last_name': last_name, 'email':email}
     return render(request, 'selected_reservation.html', context, )
 
 def update_database(request):

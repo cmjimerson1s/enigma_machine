@@ -14,8 +14,8 @@
         <input type="hidden" name="date" value="{{ booking.specific_date }}">
         <h3>Group Size:<input name="number" type="number" min="2" max="7"></h3>
     {% endfor %}
-        <input type="text" name="name">
-        <input type="text" name="email">
+        <input type="text" name="name" value="{{ first_name}} {{ last_name }}">
+        <input type="text" name="email" value="{{ email }}">
         <input type="text" name="phone">
         <input type="number" name="price" min="300">
         <textarea name="comment" style="resize:none;"></textarea>

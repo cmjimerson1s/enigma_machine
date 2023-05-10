@@ -11,6 +11,7 @@ class Reservation(models.Model):
     time_slot = models.CharField(max_length=5)
     room_choice = models.ForeignKey('Room', on_delete=models.CASCADE, related_name="room_choice", null=True)
     comment = models.TextField(max_length=300, default='')
+    user_id = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['-date']

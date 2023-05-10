@@ -62,7 +62,7 @@
             <li><a href="contact.html">Contact</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'account_logout' %}">Logout</a></li>
-            <li><a href="contact.html">Account</a></li>
+            <li><a href="{% url 'account_overview' %}">Account</a></li>
             {% else %}
             <li><a href="{% url 'account_signup' %}">Register</a></li>
             <li><a href="{% url 'account_login' %}">Login</a></li>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Account Page</h1>
+    <h1>{{ username }}</h1>
+    <h1>{{ first_name }}</h1>
+    <h1>{{ last_name }}</h1>
+    <h1>{{ user_id }}</h1>
+    <a href="{% url 'account_bookings' %}">Reservations</a>
+{% endblock %}
