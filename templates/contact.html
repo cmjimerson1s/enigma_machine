@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 <section id="get-started" class="get-started section-bg">
     <div class="container">
 
@@ -14,46 +21,26 @@
         </div>
 
         <div class="col-lg-5" data-aos="fade">
-          <form action="{% url 'contact_us' %}" method="post">
+          <form action="{% url 'contact_us_post' %}" method="post">
             {% csrf_token %}
             <h3>Get a quote</h3>
             <p>Vel nobis odio laboriosam et hic voluptatem. Inventore vitae totam. Rerum repellendus enim linead sero park flows.</p>
             <div class="row gy-3">
-            {% if user.is_authenticated %}
-            
                 <div class="col-md-12">
-                    <input type="text" name="name" class="form-control" value="{{first_name}} {{last_name}}">
+                   <div class="form-control">{{ form.inquiry_name }}</div>
                 </div>
 
                 <div class="col-md-12 ">
-                    <input type="email" class="form-control" name="email" value="{{ email }}" >
+                  <div class="form-control">{{ form.inquiry_email }}</div>
                 </div>
 
                 <div class="col-md-12">
-                    <input type="text" class="form-control" name="phone" placeholder="Phone" >
+                  <div class="form-control">{{ form.phone_number }}</div>
                 </div>
 
                 <div class="col-md-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" ></textarea>
+                  <div class="form-control">{{ form.inquiry_message }}</div>
                 </div>
-            {% else %}
-
-              <div class="col-md-12">
-                <input type="text" name="name" class="form-control" placeholder="Name" >
-              </div>
-
-              <div class="col-md-12 ">
-                <input type="email" class="form-control" name="email" placeholder="Email" >
-              </div>
-
-              <div class="col-md-12">
-                <input type="text" class="form-control" name="phone" placeholder="Phone" >
-              </div>
-
-              <div class="col-md-12">
-                <textarea class="form-control" name="message" rows="6" placeholder="Message" ></textarea>
-              </div>
-            {% endif %}
                 <button type="submit">Contact Us!</button>
               </div>
 
