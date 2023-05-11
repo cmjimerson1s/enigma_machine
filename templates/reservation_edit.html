@@ -5,6 +5,11 @@
         <input type="hidden" name="res_id" value="{{res_id}}">
         <input type="date" name="picked_date" value="{{picked_date}}"><button type="submit">View Available Games</button>
 </form>
+<form method = POST action="{% url 'delete_booking' %}">
+    {% csrf_token %}
+        <input type="hidden" name="res_id" value="{{res_id}}">
+        <button type="submit">Delete Booking</button>
+</form>
 {% for result in results %}
     {% for key, values in result.items %}
         {{key}}

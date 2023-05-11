@@ -41,4 +41,18 @@
         {% endif %}
     {% endfor %} -->
     <a href="{% url 'account_bookings' %}">Reservations</a>
+    Don't forget to tell others about your time with us!
+    Review Here! 
+    <a href="www.facebook.com" target="_blank" aria-label="Opens link to Facebook.com in another window">Facebook</a>
+    <a href="www.tripadvisor.com" target="_blank" aria-label="Opens link to Tripadvisor.com in another window">TripAdvisor</a>
+    <a href="www.yelp.com" target="_blank" aria-label="Opens link to Yelp.com in another window">Yelp</a>
+    <a href="www.google.com" target="_blank" aria-label="Opens link to Google.com in another window">Google</a>
+
+    <form method='post' action="{% url 'delete_account' %}">
+    {% csrf_token %}
+        <button type="submit">Request Account Deletion</button>
+        <input type="hidden" name="user_id" value="{{user_id}}">
+
+    </form>
+
 {% endblock %}
