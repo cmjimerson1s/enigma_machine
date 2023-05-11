@@ -13,13 +13,19 @@
         <h2>Past</h2>
                 <h1>{{ reservation.0}} {{ reservation.1}} {{ reservation.2}}</h1>
     {% else %}
-        <form method="post" action="{% url 'booking_edit' %}">
+        <form method="post" action="{% url 'booking_edit_selection' %}">
         {% csrf_token %}
             <h2>Future</h2>
                 <h1>{{ reservation.0}} {{ reservation.1}} {{ reservation.2}}</h1><button type="submit">Edit</button>
                 <input type="hidden" name="res_id" value="{{reservation.3}}">
         </form>
     {% endif %}
+    {% endfor %}
+        <input type="text" name="date">
+    {% for timeslot in timeslots %}
+        {% if timeslot.date == date %}
+            {{ timeslot.time }}
+        {% endif %}
     {% endfor %}
     <!-- <h1>{{entries}}</h1>
     <h1>{{ current_datetime }}</h1>

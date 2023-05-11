@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<form method = POST action="{% url 'update_booking' %}">
+    {% csrf_token %}
+        <input type="hidden" name="res_id" value="{{res_id}}">
+        <input type="date" name="picked_date" value="{{picked_date}}"><button type="submit">View Available Games</button>
+</form>
+{% for result in results %}
+    {% for key, values in result.items %}
+        {{key}}
+        {% for value in values %}
+            {% if value != 45 %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="key" value="{{ key }}">
+                    <input type="hidden" name="value" value="{{ value }}">
+                    <input type="hidden" name="specific_date" value="{{ specific_date }}">
+                    <input type="hidden" name="res_id" value="{{res_id}}">
+                    <button type="submit" class="my-button btn btn-primary text-white" data-key="{{ key }}" data-value="{{ value }}">{{ value }}</button>
+                </form>
+            {% endif %}
+
+        {% endfor %}
+    {% endfor %}
+{% endfor %} 
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from bookings.models import Reservation
+from bookings.models import Reservation, GameTime, Room
 from django.utils import timezone
 from datetime import datetime, date
 
@@ -51,12 +51,75 @@ def AccountReservations(request):
     return render(request, template, context)
 
 
-def BookingEdit(request):
-    template = 'account_page.html'
+def BookingEditSelection(request):
+    template = 'reservation_edit.html'
     res_id = request.POST.get('res_id')
+    res = Reservation.objects.filter(id=res_id)
+    reservations = []
+    for entry in res:
+        room = entry.room_choice
+        time = entry.time_slot
+        date = entry.date
+        res = (date, time, room)
+        reservations.append(res)
+
 
     context = {
-        'res': res
+        'reservations': reservations, 'res_id': res_id
     }
 
     return render(request, template, context)
+
+def UpdateSelection(request):
+    template = 'reservation_edit.html'
+    res_id = request.POST.get('res_id')
+    selected_date = request.POST.get('picked_date')
+    time_slot = GameTime.objects.all()
+    room_list = Room.objects.all()
+    results = dayView(room_list, selected_date, time_slot)
+
+    context = {
+        'results': results, 'res_id': res_id
+    }
+
+    return render(request, template, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def checkRes(room, date, time):
+
+    if (Reservation.objects.filter(date=date, room_choice=room, time_slot=time).exists()):
+        result = 45
+        return result
+    else:
+        result = time
+        return result
+
+
+def timeChecks(room, date, times):
+    result = []
+    for time in times:
+        checked = checkRes(room, date, time)
+        result.append(checked)
+    return result  
+
+
+def dayView(rooms, date, times):
+    result = []
+    for room in rooms:
+        time_list = timeChecks(room, date, times)
+        list_pairs = {room: time_list}
+        result.append(list_pairs)
+    return result    
