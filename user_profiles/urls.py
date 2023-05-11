@@ -7,5 +7,6 @@ urlpatterns = [
     path('account_bookings', views.AccountReservations, name='account_bookings'),
     path('booking_edit_selection', views.BookingEditSelection, name='booking_edit_selection'),
     path('update_booking', views.UpdateSelection, name='update_booking'),
+    path('post_update', views.UpdateReservationEntry, name='post_update'),
 
 ]

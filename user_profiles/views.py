@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from bookings.models import Reservation, GameTime, Room
 from django.utils import timezone
 from datetime import datetime, date
@@ -79,13 +79,27 @@ def UpdateSelection(request):
     results = dayView(room_list, selected_date, time_slot)
 
     context = {
-        'results': results, 'res_id': res_id
+        'results': results, 'res_id': res_id, 'selected_date': selected_date
     }
 
     return render(request, template, context)
 
 
+def UpdateReservationEntry(request):
+    res_id = request.POST.get('res_id')
+    room_name = request.POST.get('key')
+    time = request.POST.get('value')
+    date = request.POST.get('selected_date')
+    room = Room.objects.get(room_name=room_name)
 
+    reservation = Reservation.objects.get(id=res_id)
+    reservation.date = date
+    reservation.time_slot = time
+    reservation.room_choice = room
+
+    reservation.save(update_fields=['date', 'time_slot','room_choice'])
+
+    return redirect('account_bookings')
 
 
 

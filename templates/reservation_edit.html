@@ -10,11 +10,11 @@
         {{key}}
         {% for value in values %}
             {% if value != 45 %}
-                <form method="POST">
+                <form method="POST" action="{% url 'post_update'%}">
                     {% csrf_token %}
                     <input type="hidden" name="key" value="{{ key }}">
                     <input type="hidden" name="value" value="{{ value }}">
-                    <input type="hidden" name="specific_date" value="{{ specific_date }}">
+                    <input type="hidden" name="selected_date" value="{{ selected_date }}">
                     <input type="hidden" name="res_id" value="{{res_id}}">
                     <button type="submit" class="my-button btn btn-primary text-white" data-key="{{ key }}" data-value="{{ value }}">{{ value }}</button>
                 </form>
