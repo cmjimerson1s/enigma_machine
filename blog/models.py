@@ -2,8 +2,6 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 
 
-# Create your models here.
-
 class BlogPost(models.Model):
     blog_title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)

@@ -1,8 +1,12 @@
 from django.shortcuts import render
+from .models import BlogPost
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 def BlogListView(request):
+    blog_posts = BlogPost.objects.all()
     template = 'blog_posts.html'
-    blog_list = Post.objects.all.order_by("-created_on")
-    paginate_by = 6
-
-    return render(request, template)
+    context = {
+        'blog_posts': blog_posts
+    }
+    return render(request, template, context)

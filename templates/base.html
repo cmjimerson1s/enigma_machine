@@ -57,7 +57,7 @@
             <li><a href="{% url 'home' %}" class="active">Home</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="services.html">Rooms</a></li>
-            <li><a href="{% url 'blog_list_view' %}">Blog</a></li>
+            <li><a href="{% url 'blog-post-list' %}">Blog</a></li>
             <li><a href="{% url 'choose_date' %}">Book Now</a></li>
             <li><a href="{% url 'contact_us' %}">Contact</a></li>
             {% if user.is_authenticated %}
