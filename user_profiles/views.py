@@ -30,13 +30,16 @@ def AccountReservations(request):
     entries = Reservation.objects.filter(user_id=user_id)
     reservations = []
     for entry in entries:
+        res_num = entry.id
         room = entry.room_choice
         time = entry.time_slot
         date = entry.date
+        res = (date, time, room, res_num)
+        reservations.append(res)
         # new_date = date.date()
-        reservations.append(date)
-        reservations.append(time)
-        reservations.append(room)
+        # reservations.append(date)
+        # reservations.append(time)
+        # reservations.append(room)
 
     current_datetime = datetime.now()
 
@@ -44,5 +47,16 @@ def AccountReservations(request):
     current_date = current_datetime.date()
 
     context = {'entries': entries, 'reservations': reservations, 'current_date': current_date}
+
+    return render(request, template, context)
+
+
+def BookingEdit(request):
+    template = 'account_page.html'
+    res_id = request.POST.get('res_id')
+
+    context = {
+        'res': res
+    }
 
     return render(request, template, context)

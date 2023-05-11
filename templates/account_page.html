@@ -7,17 +7,20 @@
     <h1>{{ user_id }}</h1>
     <h1>{{ reservations }}</h1>
     <h1>{{ current_date }}</h1>
-    {% if current_date > reservations|first %}
+    <h1>{{res}}</h1>
+    {% for reservation in reservations %}
+    {% if current_date > reservation|first %}
         <h2>Past</h2>
-        {% for reservation in reservations %}
-                <h1>{{ reservation}}</h1>
-        {% endfor %}
+                <h1>{{ reservation.0}} {{ reservation.1}} {{ reservation.2}}</h1>
     {% else %}
-        <h2>Future</h2>
-        {% for reservation in reservations %}
-                <h1>{{ reservation }}: Edit</h1>
-        {% endfor %}
+        <form method="post" action="{% url 'booking_edit' %}">
+        {% csrf_token %}
+            <h2>Future</h2>
+                <h1>{{ reservation.0}} {{ reservation.1}} {{ reservation.2}}</h1><button type="submit">Edit</button>
+                <input type="hidden" name="res_id" value="{{reservation.3}}">
+        </form>
     {% endif %}
+    {% endfor %}
     <!-- <h1>{{entries}}</h1>
     <h1>{{ current_datetime }}</h1>
     {% for entry in entries%}

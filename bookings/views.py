@@ -110,6 +110,7 @@ def update_database(request):
             room_name = item['key']
             time = item['value']
             comment = request.POST.get('comment')
+            user_id = request.user.id
             room = Room.objects.get(room_name=room_name)
 
             # Create a new instance of the Reservation model and set its attributes
@@ -123,6 +124,7 @@ def update_database(request):
             instance.room_choice = room
             instance.time_slot = time
             instance.comment = comment
+            instance.user_id = user_id
             instance.save()
     del request.session['cart']
     return HttpResponse('Data saved successfully.')
