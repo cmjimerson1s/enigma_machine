@@ -21,58 +21,19 @@
         <h3>Need to update your account information?</h3>
         <button type=submit>Update Here</button>
     </form>
-
-
-    
-
-    <h1>{{ reservations }}</h1>
-    <h1>{{ current_date }}</h1>
-    <h1>{{res}}</h1>
-    {% for reservation in reservations %}
-    {% if current_date > reservation|first %}
-        <h2>Past</h2>
-                <h1>{{ reservation.0}} {{ reservation.1}} {{ reservation.2}}</h1>
-    {% else %}
-        <form method="post" action="{% url 'booking_edit_selection' %}">
-        {% csrf_token %}
-            <h2>Future</h2>
-                <h1>{{ reservation.0}} {{ reservation.1}} {{ reservation.2}}</h1><button type="submit">Edit</button>
-                <input type="hidden" name="res_id" value="{{reservation.3}}">
-        </form>
-    {% endif %}
-    {% endfor %}
-        <input type="text" name="date">
-    {% for timeslot in timeslots %}
-        {% if timeslot.date == date %}
-            {{ timeslot.time }}
-        {% endif %}
-    {% endfor %}
-    <!-- <h1>{{entries}}</h1>
-    <h1>{{ current_datetime }}</h1>
-    {% for entry in entries%}
-        {% if entry > current_datetime %}
-            {% for reservation in reservation %}
-                <h1>{{ reservation}}: Future</h1>
-            {% endfor %}
-        {% else %}
-            {% for reservation in reservations %}
-                <h1>{{ reservation }}</h1>
-            {% endfor %}
-        {% endif %}
-    {% endfor %} -->
-    <a href="{% url 'account_bookings' %}">Reservations</a>
+    <form action="{% url 'account_bookings'%}">
+        <button type="submit">Reservations</button>
+        <input type="hidden" name="username" value="">
+        <input type="hidden" name="first_name" value="">
+        <input type="hidden" name="last_name" value="">
+        <input type="hidden" name="email" value="">
+        <input type="hidden" name="user_id" value="{{user_id}}">
+    </form>
     Don't forget to tell others about your time with us!
     Review Here! 
     <a href="www.facebook.com" target="_blank" aria-label="Opens link to Facebook.com in another window">Facebook</a>
     <a href="www.tripadvisor.com" target="_blank" aria-label="Opens link to Tripadvisor.com in another window">TripAdvisor</a>
     <a href="www.yelp.com" target="_blank" aria-label="Opens link to Yelp.com in another window">Yelp</a>
     <a href="www.google.com" target="_blank" aria-label="Opens link to Google.com in another window">Google</a>
-
-    <form method='post' action="{% url 'delete_account' %}">
-    {% csrf_token %}
-        <button type="submit">Request Account Deletion</button>
-        <input type="hidden" name="user_id" value="{{user_id}}">
-
-    </form>
 
 {% endblock %}

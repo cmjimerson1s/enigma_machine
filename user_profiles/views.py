@@ -31,9 +31,8 @@ def AccountOverview(request):
     return render(request, template, context)
 
 def AccountReservations(request):
-    template = 'account_page.html'
-    if request.user.is_authenticated:
-        user_id = request.user.id
+    template = 'account_bookings.html'
+    user_id = request.user.id
 
     entries = Reservation.objects.filter(user_id=user_id)
     reservations = []
@@ -101,10 +100,11 @@ def UpdateReservationEntry(request):
     reservation.date = date
     reservation.time_slot = time
     reservation.room_choice = room
-
+    
+    messages.success(request, 'Form submitted successfully!')
     reservation.save(update_fields=['date', 'time_slot','room_choice'])
 
-    return redirect('account_bookings')
+    return redirect('account_overview')
 
 def DeleteBooking(request):
     res_id = request.POST.get('res_id')

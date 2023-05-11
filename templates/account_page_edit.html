@@ -10,5 +10,11 @@
     <input type="hidden" name="user_id" value="{{user_id}}">
     <button type="submit">Update Now</button>
 </form>
+<form method='post' action="{% url 'delete_account' %}">
+    {% csrf_token %}
+        <button type="submit">Request Account Deletion</button>
+        <input type="hidden" name="user_id" value="{{user_id}}">
+
+    </form>
 {% endblock %}
     
