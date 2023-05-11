@@ -1,8 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.core.mail import send_mail, EmailMessage
-# from enigma_machine.settings import EMAIL_HOST_USER
-from django.template.loader import render_to_string
+
 
 # Create your views here.
 def ContactUs(request):
