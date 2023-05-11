@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from bookings.models import Reservation, GameTime, Room
 from django.utils import timezone
 from datetime import datetime, date
@@ -16,12 +17,15 @@ def AccountOverview(request):
         first_name = request.user.first_name
         last_name = request.user.last_name
         user_id = request.user.id
+        email = request.user.email
+    
 
     context = {
         'username': username,
         'first_name': first_name,
         'last_name': last_name,
         'user_id': user_id,
+        'email': email,
     }
 
     return render(request, template, context)
@@ -40,15 +44,12 @@ def AccountReservations(request):
         date = entry.date
         res = (date, time, room, res_num)
         reservations.append(res)
-        # new_date = date.date()
-        # reservations.append(date)
-        # reservations.append(time)
-        # reservations.append(room)
 
     current_datetime = datetime.now()
+    current_date = current_datetime.date()
 
     # Extract the date component of the datetime object
-    current_date = current_datetime.date()
+    
 
     context = {'entries': entries, 'reservations': reservations, 'current_date': current_date}
 
@@ -120,6 +121,52 @@ def DeleteAccount(request):
         return redirect('home')
 
 
+def AccountUpdateView(request):
+    template = 'account_page_edit.html'
+
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        username = request.user.username
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+        email = request.user.email
+
+    
+
+    context = {
+        'username': username,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'user_id': user_id
+    }
+
+    return render(request, template, context)
+
+def AccountUpdatePosting(request):
+    template = 'account_page.html'
+    user_id = int(request.POST.get('user_id'))
+    new_first_name = request.POST.get('new_first_name')
+    new_last_name = request.POST.get('new_last_name')
+    new_email = request.POST.get('new_email')
+    new_username = request.POST.get('new_username')
+
+    update = User.objects.get(id=user_id)
+    update.username = new_username
+    update.first_name = new_first_name
+    update.last_name = new_last_name
+    update.email = new_email
+    update.save(update_fields=['username', 'first_name','last_name', 'email'])
+
+    messages.success(request, 'Form submitted successfully!')
+    context = {
+        'username': new_username,
+        'first_name': new_first_name,
+        'last_name': new_last_name,
+        'email': new_email,
+        'user_id': user_id
+    }
+    return render(request, template, context)
 
 
 

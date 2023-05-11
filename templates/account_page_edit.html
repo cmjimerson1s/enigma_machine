@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" action="{% url 'account_update_post'%}">
+    {% csrf_token %}
+    <h1>Edit Account Information</h1>
+    <input type="text" name="new_username" value="{{ username }}">
+    <input type="text" name="new_first_name" value="{{ first_name }}">
+    <input type="text" name="new_last_name" value="{{ last_name }}">
+    <input type="text" name="new_email" value="{{ email }}">
+    <input type="hidden" name="user_id" value="{{user_id}}">
+    <button type="submit">Update Now</button>
+</form>
+{% endblock %}
+    
