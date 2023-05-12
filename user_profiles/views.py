@@ -4,21 +4,19 @@ from bookings.models import Reservation, GameTime, Room
 from django.utils import timezone
 from datetime import datetime, date
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
-
-
+@login_required
 def AccountOverview(request):
     template = 'account_page.html'
 
-    if request.user.is_authenticated:
-        username = request.user.username
-        first_name = request.user.first_name
-        last_name = request.user.last_name
-        user_id = request.user.id
-        email = request.user.email
-    
+    username = request.user.username
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    user_id = request.user.id
+    email = request.user.email
 
     context = {
         'username': username,
@@ -26,9 +24,11 @@ def AccountOverview(request):
         'last_name': last_name,
         'user_id': user_id,
         'email': email,
+        
     }
 
     return render(request, template, context)
+
 
 def AccountReservations(request):
     template = 'account_bookings.html'

@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 from .models import BlogPost
-from . import views
+from . import views 
 
 class BlogPostListViewTest(TestCase):
 
