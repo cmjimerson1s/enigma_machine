@@ -13,4 +13,4 @@ class ContactUs(models.Model):
         ordering = ['created_date']
 
     def __str__(self):
-        return f"{self.name} Iquiry Date: {self.created_date}"
+        return f"{self.inquiry_name} Iquiry Date: {self.created_date}"
