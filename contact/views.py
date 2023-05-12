@@ -28,3 +28,7 @@ class ContactUsPost(View):
             form.save()
             messages.success(request, "Message has been sent")
             return render(request, 'contact.html', {'form': new_form})
+        else:
+            new_form = ContactUs(request)
+            messages.error(request, "Error: Please try again")
+            return render(request, 'contact.html', {'form': new_form})
