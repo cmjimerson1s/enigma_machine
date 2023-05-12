@@ -1,4 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>test</h1>
+{% for room in room_list %}
+<h1>{{ room.room_name }}</h1>
+<p>{{ room.room_description }}</p>
+{% endfor %}
 {% endblock %}
