@@ -1,4 +1,6 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
+
 
 
 class Reservation(models.Model):
@@ -23,6 +25,7 @@ class Reservation(models.Model):
 class Room(models.Model):
     room_name = models.CharField(max_length=200)
     room_description = models.TextField()
+    blog_image = CloudinaryField('image', default='placeholder')
 
     class Meta:
         ordering = ['room_name']
