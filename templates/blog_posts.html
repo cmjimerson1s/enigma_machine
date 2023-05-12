@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Blog Posts</h1>
+{% if blogpost_list%}
   {% for blogpost in blogpost_list %}
     <a href="{% url 'detail_view' blogpost.slug %}">
       <h2>{{ blogpost.blog_title }}</h2>
       <h2>{{ blogpost.slug }}</h2>
     </a>
   {% endfor %}
+{% else %}
+  <h1>No blog posts are available</h1>
+{% endif %}
 {% endblock %}
