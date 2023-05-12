@@ -10,7 +10,7 @@ class ContactUs(models.Model):
     inquiry_message = models.TextField()
 
     class Meta:
-        ordering = ['created_date']
+        ordering = ['-created_date']
 
     def __str__(self):
         return f"{self.inquiry_name} Iquiry Date: {self.created_date}"
