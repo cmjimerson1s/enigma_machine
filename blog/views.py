@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from .models import BlogPost
-from django.views import generic, View
+from django.views import generic, View 
 
 
 class BlogListView(generic.ListView):

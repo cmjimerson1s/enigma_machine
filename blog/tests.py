@@ -2,12 +2,11 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 from .models import BlogPost
-from . import views 
+from . import views  
 
 class BlogPostListViewTest(TestCase):
 
     def setUp(self):
-        self.client = Client()
         self.blogpost1 = BlogPost.objects.create(
             blog_title="Blog Post 1",
             slug="blog-post-1",
@@ -33,12 +32,14 @@ class BlogPostListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         #Assert that that template and content reponses match the values they should
         self.assertTemplateUsed(response, 'blog_posts.html')
-        self.assertContains(response, 'Blog Post 1')
-        self.assertContains(response, 'Blog Post 2')
+        self.assertContains(response, self.blogpost1.blog_title)
+        self.assertContains(response, self.blogpost2.blog_title)
+        self.assertContains(response, self.blogpost1.slug)
+        self.assertContains(response, self.blogpost1.blog_content)
         # Assert that the queryset of blog posts passed to the template is equal to a list of BlogPost objects as string representations
         self.assertQuerysetEqual(
             response.context['object_list'],
-            ['<BlogPost: Blog Post 2>', '<BlogPost: Blog Post 1>']
+            [f'<BlogPost: {self.blogpost2.blog_title}>', f'<BlogPost: {self.blogpost1.blog_title}>']
         )
 
 
@@ -46,7 +47,6 @@ class BlogPostListViewTest(TestCase):
 class BlogPostDetailViewTest(TestCase):
 
     def setUp(self):
-        self.client = Client()
         self.blogpost = BlogPost.objects.create(
             blog_title="Blog Post",
             slug="blog-post",
